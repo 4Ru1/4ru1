@@ -27,26 +27,7 @@
   background-size:contain;
 
 }
-          // ミリ秒を画面表示する形式に変換
-    const timeString = time =>`${
-        Math.floor(time / 60000).toString().padStart(2,"00")
-    }:${
-        Math.floor(time % 60000 / 1000).toString().padStart(2,"00")
-    }.${
-        Math.floor(time % 1000).toString().padStart(3,"000").slice(0,2)
-    }`;
-
-    const watchArea = document.getElementById("watchArea");
-    const wrapArea = document.getElementById("wrapArea");
-
-    const stopWatchObj = getStopWatch(
-         time => watchArea.textContent = time === null ? "00:00.00" : timeString( time ) ,
-         time => wrapArea.value = time === null ? "" : wrapArea.value + "\n" + timeString( time )
-    );
-
-
-
-
+         
       @charset "utf-8";
   
         /*全体*/
