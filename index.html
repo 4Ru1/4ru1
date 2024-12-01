@@ -132,7 +132,7 @@
               timer = setTimeout(function () {
                   // 経過時間を設定し、画面へ表示
                   elapsedTime = Date.now() - startTime + holdTime;
-                  showTime.textContent = new Date(elapsedTime).toISOString().slice(19, 22);
+                  showTime.textContent = new Date(elapsedTime).toISOString().slice(18, 22);
                   
                   // 関数を呼び出し、時間計測を継続する
                   measureTime();
