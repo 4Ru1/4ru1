@@ -67,76 +67,46 @@
         </style>
 
         <script>
-          var startButton;    // startボタン
-          var stopButton;     // stopボタン
-          var resetButton;    // resetボタン
-          var showTime;       // 表示時間
-          
-          var timer;              // setinterval, clearTimeoutで使用
-          var startTime;          // 開始時間
-          var elapsedTime = 0;    // 経過時間
-          var holdTime = 0;       // 一時停止用に時間を保持
-          
-          window.onload = function () {
-              startButton = document.getElementById("start");
-              stopButton = document.getElementById("stop");
-              resetButton = document.getElementById("reset");
-              showTime = document.getElementById("time");
-          }
-          
-          // スタートボタン押下時
-          function start(){
-              // 開始時間を現在の時刻に設定
-              startTime = Date.now();
-          
-              // 時間計測
-              measureTime();
-          
-              startButton.disabled = true;
-              stopButton.disabled = false;
-              resetButton.disabled = false;
-          }
-          
-          // ストップボタン押下時
-          function stop(){
-              // タイマー停止
-              clearInterval(timer);
-          
-              // 停止時間を保持
-              holdTime += Date.now() - startTime;
-          
-              startButton.disabled = false;
-              stopButton.disabled = true;
-              resetButton.disabled = false;
-          }
-          
-          // リセットボタン押下時
-          function reset(){
-              // タイマー停止
-              clearInterval(timer);
-          
-              // 変数、表示を初期化
-              elapsedTime = 0;
-              holdTime = 0;
-              showTime.textContent = "00:00.00";
-          
-              startButton.disabled = false;
-              stopButton.disabled = true;
-              resetButton.disabled = true;
-          }
-          
-          // 時間を計測（再帰関数）
-          function measureTime() {
-              // タイマーを設定
-              timer = setTimeout(function () {
-                  // 経過時間を設定し、画面へ表示
-                  elapsedTime = Date.now() - startTime + holdTime;
-                  showTime.textContent = new Date(elapsedTime).toISOString().slice(14, 23);
-                  
-                  // 関数を呼び出し、時間計測を継続する
-                  measureTime();
-              }, 10);
-          }
+          var h1 = document.getElementsByTagName('h1')[0];
+　　　　　 var start = document.getElementById('strt');
+          var stop = document.getElementById('stp');
+          var reset = document.getElementById('rst');
+          var sec = 0;
+          var min = 0;
+          var hrs = 0;
+          var t;
+
+          function tick() {
+           sec++;
+          if (sec >= 60) {
+           sec = 0;
+           min++;
+          if (min >= 60) {
+           min = 0;
+           hrs++;
+    }
+  }
+}
+function add() {
+  tick();
+  h1.textContent = (hrs > 9 ? hrs : '0' + hrs) + ':' +
+      (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
+  timer();
+}
+function timer() {
+  t = setTimeout(add, 1000);
+}
+
+timer();
+start.onclick = timer;
+stop.onclick = function() {
+  clearTimeout(t);
+} reset.onclick = function() {
+  h1.textContent = '00:00:00';
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+}
           </script>
   </body>
 
